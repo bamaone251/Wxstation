@@ -2,37 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=ifr, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="manifest" href="manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".forecast-images-big img");
+            images.forEach(img => {
+                const originalSrc = img.src;
+                const uniqueQuery = `?t=${new Date().getTime()}`;
+                img.src = originalSrc + uniqueQuery;
+            });
+        });
+    </script>
+
     <style>
-
         body {
-            background-color: #010e0e;
-        }
-        .container {
-            background-color: #0a4646;
-            width: 60%;
-            height: 100%;
+            background-color: #0b1111;
+            margin: 0;
+            padding: 1px;
+            font-family: Arial, sans-serif;
+            width: 99%;
+            justify-self: center;
         }
 
-        
- /* Navbar */
-         .navbar {
+        /* Navbar */
+        .navbar {
             display: flex;
             justify-content: space-around;
             background-color: #0a4646;
-            padding: 5px;
-            margin-bottom: 3px;
+            padding: 10px;
+            margin-bottom: 5px;
         }
 
         .navbar .button {
-            background-color: #27a0a0;
+            background-color: #071313;
             color: #fff;
             border: none;
-            padding: 8px 12px;
+            padding: 5px 8px;
             text-decoration: none;
-            font-size: 10px;
+            font-size: 14px;
+            font-weight: 400;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
@@ -42,65 +51,237 @@
             background-color: #a55050;
         }
 
-        .map img {
-           
-            width: 40%;
-            height: 40%;
+        h1 {
+            justify-self: center;
+            padding: 1px;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            color: #bda0a0;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-style: oblique;
         }
 
-        .main {
-            background-color: #313131;
+        
+        /* Container for images and content */
+        .content-container {
+            display: grid;
+            grid-row: 2 1fr;
+            gap: 1px;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        
+
+        .forecast-images img {
+            cursor: pointer;
+            padding-left: 2px;
+            max-width: 47%;
+            max-height: 35%;
+            margin: 2px;
+            justify-content: center;
+        }
+
+        .forecast-images-big img {
+            cursor: pointer;
+            height: 350;
+            max-width: 42%;
+            min-height: 200px;
+            max-height: 35%;
+            margin: 1px;
+            justify-content: center;
+        }
+
+        .full-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .full-screen img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Tide Charts */
+        .tides {
             display: flex;
             flex-wrap: wrap;
-            width: 100%;
-            height: auto;
+            justify-content: center;
+            gap: 2px;
+            margin-top: 20px;
         }
 
-        .tides {
-            justify-self: center;
-            width: 80%;
-            height: 250px;
-            max-height: 25%;
+        .tides img {
+            width: 48%;
+            height: 150px;
+            border-radius: 5px;
         }
+
+        /* Sunset Widget */
+        .sunset {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        /* Footer Section */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        .station {
+            width: 98%;
+            object-fit: fill;
+            align-self: center;
+        }
+
+        .iframe-container {
+            height: 60%;
+        }
+
+        
+
+        .container {
+            display: flex;
+            gap: 10px;
+            padding-bottom: 5px;
+            padding-left: 0px;
+            padding-right: 5px;
+            justify-content: center;
+        }
+
+    .weather-card {
+      background-color: #0b2638;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 40%;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .weather-card h1 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .weather-card p {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #fdfcfc;
+    }
+
+        
     </style>
 </head>
 <body>
-
-   
-    <div class="navbar">
-      
-        
-        
-        <a href="EUS.html" class="button" target="_blank">EAST</a>
-        <a href="SE.html" class="button" target="_blank">SE</a>
-        <a href="MID.html" class="button" target="_blank">MID</a>
-        <a href="ROCKIES.html" class="button" target="_blank">MTN</a>
-        <a href="WEST.html" class="button" target="_blank">WEST</a>
-        <a href="MEXCAN.html" class="button" target="_blank">MEX/CAN</a>
-        </div>
-
-    <div class="navbar">
-      
-        <a href="tracking.html" class="button" target="_blank">PLANES / BOATS</a>
-        <a href="cams.html" class="button" target="_blank">CAMS</a>
-        <a href="https://weather.cod.edu/satrad/nexrad/?parms=MOB-N0B-0-24-100-usa-ww" class="button" target="_blank">RADAR</a>
-        
-    </div>
-
   
-      <iframe width="100%" height="1000px" src="https://internetvail.com/FYC/index.php?theme=dark&lang=en-us&units=us">
+    <!-- Navbar -->
+   
 
-        </iframe>
-
-        <div class="tides">
-
-        <img width="95%" height="200px" src="https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png"></iframe>
-
-        <img width="95%" height="200px" src="https://www.tideschart.com/tide-charts/en/Fairhope-Baldwin-County-Alabama-United-States-tide-chart-6104788-ft.png"></iframe>
-
-        <img width="95%" height="200px" src="https://www.tideschart.com/tide-charts/en/Great-Point-Clear-(Mobile-Bay)-Baldwin-County-Alabama-United-States-tide-chart-30019251-ft.png"></iframe>
     
+    <div class="container">
+        
+
+
+ 
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Weather Forecast Images -->
+        <div class="forecast-images">
+      
+<H1>CONUS</H1>
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/Sandwich/GOES16-CONUS-Sandwich-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/02/GOES16-CONUS-02-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/07/GOES16-CONUS-07-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/08/GOES16-CONUS-08-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/13/GOES16-CONUS-13-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/AirMass/GOES16-CONUS-AirMass-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/DMW/GOES16-ABI-CONUS-DMW.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/DayNightCloudMicroCombo/GOES16-CONUS-DayNightCloudMicroCombo-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/FireTemperature/GOES16-CONUS-FireTemperature-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/GOES16-CONUS-GEOCOLOR-625x375.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/GEOCOLOR/1808x1808.jpg">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/AirMass/1808x1808.jpg">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/Sandwich/1808x1808.jpg">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/DayConvection/1808x1808.jpg">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/FD/DayNightCloudMicroCombo/1808x1808.jpg">
+            
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const forecastImages = document.querySelectorAll(".forecast-images img");
+                let fullScreenDiv = null;
+    
+                forecastImages.forEach(img => {
+                    img.addEventListener("click", () => {
+                        if (!fullScreenDiv) {
+                            fullScreenDiv = document.createElement("div");
+                            fullScreenDiv.classList.add("full-screen");
+    
+                            const fullScreenImg = document.createElement("img");
+                            fullScreenImg.src = img.src;
+                            fullScreenDiv.appendChild(fullScreenImg);
+    
+                            document.body.appendChild(fullScreenDiv);
+    
+                            fullScreenDiv.addEventListener("dblclick", () => {
+                                document.body.removeChild(fullScreenDiv);
+                                fullScreenDiv = null;
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
         </div>
-    
+
+       
+
+     
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const forecastImages = document.querySelectorAll(".forecast-images-big img");
+                    let fullScreenDiv = null;
+        
+                    forecastImages.forEach(img => {
+                        img.addEventListener("click", () => {
+                            if (!fullScreenDiv) {
+                                fullScreenDiv = document.createElement("div");
+                                fullScreenDiv.classList.add("full-screen");
+        
+                                const fullScreenImg = document.createElement("img");
+                                fullScreenImg.src = img.src;
+                                fullScreenDiv.appendChild(fullScreenImg);
+        
+                                document.body.appendChild(fullScreenDiv);
+        
+                                fullScreenDiv.addEventListener("dblclick", () => {
+                                    document.body.removeChild(fullScreenDiv);
+                                    fullScreenDiv = null;
+                                });
+                            }
+                        });
+                    });
+                });
+            </script>
+  
+        <!-- Windy Map Iframes -->
+       
+      
+
+
+
 </body>
 </html>
